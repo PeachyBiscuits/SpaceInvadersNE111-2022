@@ -8,7 +8,10 @@ BopBOpBop BopBopBop
 <<<<<<< HEAD
 
 Instructions:
-When working on a part of the project, clone the repository and make a copy of "main.py" and rename it based on what feature will be added
+For Windows, you need to download git for windows (https://git-scm.com/download/win) and use a git bash terminal
+In terminal, change directories into the one you want to store the local repository in (local repository is a folder containing the project files on your computer)
+Clone the repository and after cloning, change directory into the newly made repository (it is a folder in the directory you chose it to clone into)
+When working on a new part, make a copy of "main.py" and rename it based on what feature will be added
 Make sure to save this file in the repository that was cloned (will have the name SpaceInvadersNE111-2022)
 In the .py file, make it very clear what was changed/added
 In terminal, do git add <file> where <file> is the .py file
