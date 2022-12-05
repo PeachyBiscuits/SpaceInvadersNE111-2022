@@ -30,7 +30,7 @@ fail_font = pygame.font.SysFont('None', 70)
 # global variable to stroe if a bullet is currently fired 
 firing = False
 
-# global variable for the number of aliens at the beginning, will increment for every level 1-5
+# global variable for the number of aliens at the beginning, will increment for every level 1-6
 starting_aliens = 0
 
 # global variable for number of current aliens, initialized at 0
