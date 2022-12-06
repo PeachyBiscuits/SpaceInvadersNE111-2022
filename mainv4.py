@@ -10,7 +10,7 @@ import random
 
 '''
 For the intial globals and set up of pygame (code until the classes):
-    - Pygame setup (board font and colours) and score stuff done by SC
+    - Pygame setup (board, font and colours) and score stuff done by SC
     - Anything related to sprites done by RP
     - Anything related to level done by KF
     - Bullet and alien related globals (excluding sprites) done by EA
@@ -275,7 +275,7 @@ def spawn_aliens():
                 - Aliens will always be in multiples of 5
                 - If divisible by 10, each line will have 10 each (up to 3 rows since aliens cap at 30)
                 - If not divisible by 10, there will be one row of 5 (front most row) and each otehr row will have 10
-                - In the row of 5, the x offset between aliens will be multiplied by 2.43
+                - In the row of 5, the x offset between aliens will be multiplied by 2.43 (this value was determined experimentally)
                 - Each row will leave 200 units on the left side free (distance from last alien to wall) this was done with the first alien
                 - To initialize the position of each new alien, add the x offset for each new alien and add the y offset every 10
                 - Every 10, will start initializing from the new row on the left
