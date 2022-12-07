@@ -1,4 +1,4 @@
-#Title: Face Invaders
+##Title: Face Invaders
 #Authors: Ethan Atangan, Star Chen, Ryan Pang, Kodey Fung
 #Description: Player controls a ship (movement with leftand right arrow keys and shoot with the space bar)
 #             Shoot the aliens before they reach you, level based difficulty will increase with level as well as
@@ -134,7 +134,7 @@ Alien class done by SC
 '''
 # ALIEN OBJECT
 class alien:
-    global level  # will be used to initialize speed
+    global level  # will be used to initialize speed 
     global num_alien_sprites 
     # Any alien created will be initialized with these attributes
     speed = -math.pow(level, 2)/2 # speed of aliens will scale on level (speed will be the level to the power of 2 divided by 2) note that this starts negative
@@ -503,11 +503,11 @@ def check_hit(bullet: bullet, aliens):
         i += 1
             
 '''
-game_over function done by EA and RP
+game_over function done by SC and RP
 '''
 # function to determine if player loses
 def game_over(aliens):
-    # if player loses and choses t oquit, running will be modified
+    # if player loses and choses to quit, running will be modified
     global running
 
     # if player choses to play again, the following will be modified
