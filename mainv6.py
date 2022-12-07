@@ -18,7 +18,7 @@ For the intial globals and set up of pygame (code until the classes):
 # initialize pygame
 pygame.init()
 
-#create the "game board"
+#create the game board
 board_width = 1250
 board_height = 840
 
@@ -134,7 +134,7 @@ Alien class done by SC
 '''
 # ALIEN OBJECT
 class alien:
-    global level # will be used to initialize speed 
+    global level  # will be used to initialize speed
     global num_alien_sprites 
     # Any alien created will be initialized with these attributes
     speed = -math.pow(level, 2)/2 # speed of aliens will scale on level (speed will be the level to the power of 2 divided by 2) note that this starts negative
@@ -156,16 +156,16 @@ class alien:
         global alien_move_buffer
 
         '''
-        This code will run everytime the loop runs, however if the aliens moved on every loop, the game is too difficult.
+        This code will run everytime the loop runs. However if the aliens moved on every loop, the game is too difficult.
         So, each time this code runs, it will first check the value of alien_move_buffer. If this value is equal to 50 (experimentally determined amount)
         the aliens will move. Otherwise, it will increment this value by 1. If aliens move, this value is set back to 0. This ensures
-        aliens only move every 50 loops, acting as a buffer to the movement of the aliens, making the game easier.
+        aliens only move every 50 loops, acting as a buffer to the movement of the aliens which makes the game easier.
         '''
         if alien_move_buffer == 50:
             # every instance of movement will start with incrementing alien move tracker by the speed of the aliens 
             # (using the first alien's speed but doesn't matter since all equal)
             alien_move_tracker += aliens[i].speed
-            # if hit an edge, flip the speed 
+            # if edge is hit, flip the speed 
             # note: There is about 250 units to the left and 250 units to the right open when the aliens spawn. since they move left
             #       first, tracker will trigger when reaching 50 (all the way to the left) or 425 (all the way right, sum of free space), 
             #       accounting for sprite size
@@ -206,9 +206,9 @@ class bullet:
     speed = 12
     starting_y_pos = 700 #value to initialize y-position to when fired
     min_y = 0 #value at when the bullet reaches end of the screen
-    x_pos = 2000 #this will be initialized based on the player's current position when fired, when not fired, it "hides" off screen
-    y_pos = 0 #always starts at this value (hides off screen when not fired) and will be initialized when fired
-    image = pygame.image.load('bullet.png') #image for bullet, we decided to use a shark for comedic effect
+    x_pos = 2000 #this will be initialized based on the player's current position when fired. Hides off screen when not needed
+    y_pos = 0 #always starts at this value (hides off screen when not needed) and will be initialized when fired
+    image = pygame.image.load('bullet.png') #image for bullet; shark for comedic effect
     # rescale image
     image = pygame.transform.scale(image, bullet_size)
 
@@ -219,7 +219,7 @@ class bullet:
         # initialize starting y-position
         bullet.y_pos = bullet.starting_y_pos
     
-    #function for bullet movement (will only run if global firing = True)
+    #function for bullet movement (run if global firing = True)
     def move(bullet):
         #bullet fires down the y-axis, so movement will subtract speed value from its current y-position
         bullet.y_pos -= bullet.speed
@@ -272,7 +272,7 @@ def spawn_aliens():
     # only do this if there are more than 5 aliens
     if starting_aliens != 0:
         # do first alien outside of the loop as it will use the variable first_pos
-        # Note: aliens will render from top left across and down
+        # Note: aliens will render from top left --> across and down
         new_alien = alien()
 
         # assign the x and y positions of the new alien using first_pos
@@ -369,21 +369,21 @@ def spawn_aliens():
 '''
 keypressed function done by RP
 '''
-# function that will be called if a key is pressed. Either player movement of shooting
-# parameters: keypress holds the type of key that was pressed, player is of type ship, bullet is of type bullet
+#function that will be called if a key is pressed. Either player movement of shooting
+#parameters: keypress holds the type of key that was pressed, player is of type ship, bullet is of type bullet
 def keypressed(keypress, player: ship , bullet: bullet ):
     global firing
-    # if left arrow key was pressed, player moves left based on speed value
+    #left arrow key > left movement
     if keypress.key == pygame.K_LEFT:
-        # modify player speed value
+        #modify player speed value
         player.speed = -player.speed_multiple
 
-    # if right arrow key, player moves right based on speed value
+    #right arrow key > right movement
     elif keypress.key == pygame.K_RIGHT:
-        # modify player speed value
+        #modify player speed value
         player.speed = player.speed_multiple
 
-    # if space bar is pressed, bullet is fired if noe is not already fired
+    #space bar > bullet is fired if not fired yet
     elif keypress.key == pygame.K_SPACE:
         if firing == False:
             bullet.init(player.x_pos)
@@ -418,7 +418,7 @@ def level_up():
     global level
     global starting_aliens
     global level_msg_pos
-    # initialize the message variable which will be usedto display a message to the player
+    # initialize message variable which will be used to display a message to the player
     message = ''
 
     # beginning of level info messages
@@ -435,7 +435,7 @@ def level_up():
         # change the level msg position x value
         level_msg_pos = (400, 250)
     elif level > 6:
-        # level 5 and up info (maybe inmplement health scaling here)
+        # level 5 and up info
         message = "Increased Face Invader Speed"
         # change the level msg position x value
         level_msg_pos = (512, 250)
@@ -649,13 +649,12 @@ while running:
     '''
     last block of code for reseting display and moving and displaying aliens done by RP
     '''
-    # show the level
+    #show level
     show_level()
-    # move aliens; this is done here instead of with the other movement code (bullet and ship) as at this point,
-    # there is guranteed to be at least one alien left to move (if moving before checking if none left, there could)
-    # be no aliens left to move, causing a crash
+    #move aliens. this is done here instead of with the other movement code (bullet and ship) as at this point,
+    #there is guranteed to be at least one alien left to move. otherwise a crash could happen.
     alien.move(aliens)
-    # display aliens after move
+    #display aliens after movement
     display_aliens(aliens)
-    # update the display
+    #update display
     pygame.display.update()
