@@ -10,9 +10,9 @@ import random
 
 '''
 For the intial globals and set up of pygame (code until the classes):
-    - Pygame setup (board, font and colours) and score stuff done by SC
+    - Pygame setup (board, font and colours) done by SC
     - Anything related to sprites done by RP
-    - Anything related to level done by KF
+    - Anything related to level and score stuff done by KF
     - Bullet and alien related globals (excluding sprites) done by EA
 '''
 # initialize pygame
@@ -134,13 +134,12 @@ Alien class done by SC
 '''
 # ALIEN OBJECT
 class alien:
-    global level # will be used to initialize attributes, health(?) and speed 
+    global level # will be used to initialize speed 
     global num_alien_sprites 
     # Any alien created will be initialized with these attributes
     speed = -math.pow(level, 2)/2 # speed of aliens will scale on level (speed will be the level to the power of 2 divided by 2) note that this starts negative
                      # as aliens will move to the left first
     y_change = 50
-    health = 1 # number of shots it will take to kill (may implement health scaling later)
     # each alien will have an x and y position, will be initialized at 0 for now
     x_pos = 0
     y_pos = 0
@@ -163,11 +162,13 @@ class alien:
         aliens only move every 50 loops, acting as a buffer to the movement of the aliens, making the game easier.
         '''
         if alien_move_buffer == 50:
-            # every instance of movement will start with incrementing alien move tracker by the speed of the aliens (using the first alien's speed but doesn't matter since all equal)
+            # every instance of movement will start with incrementing alien move tracker by the speed of the aliens 
+            # (using the first alien's speed but doesn't matter since all equal)
             alien_move_tracker += aliens[i].speed
             # if hit an edge, flip the speed 
             # note: There is about 250 units to the left and 250 units to the right open when the aliens spawn. since they move left
-            #       first, tracker will trigger when reaching 50 (all the way to the left) or 425 (all the way right, sum of free space), accounting for sprite size
+            #       first, tracker will trigger when reaching 50 (all the way to the left) or 425 (all the way right, sum of free space), 
+            #       accounting for sprite size
             if alien_move_tracker <= 50 or alien_move_tracker >= 425:
                 # loop to change each alien's speed to the opposite direction using global variable and increment their y-value
                 while i < starting_aliens:
@@ -455,10 +456,10 @@ def level_up():
                 wait = False
 
 '''
-checkHit function bone by EA
+check_hit function bone by EA
 '''
 # function to see if an alien was hit
-def checkHit(bullet: bullet, aliens):
+def check_hit(bullet: bullet, aliens):
     # firing, score, and num_aliens will be modified if hit is successful
     global firing
     global score
@@ -613,7 +614,7 @@ while running:
         projectile.move()
     
     #check if projectile hit
-    checkHit(projectile, aliens)
+    check_hit(projectile, aliens)
 
     #move player
     player.move()
